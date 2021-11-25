@@ -1,0 +1,85 @@
+:root {
+  --Primary: #0B474A;
+  --White: #ffffff; 
+  
+  
+}
+
+body {
+  color: var(--White);
+  background-color: var(--Primary);
+}
+
+.button {
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.button:active {
+  transform: scale(.9);
+}
+
+#play {
+  background-image: url('../icons/icons8-circled_play1.svg');
+  background-position: center;
+}
+#pause {
+  background-image: url('../icons/icons8-pause_button1.svg');
+  background-position: center;
+}
+#backward {
+  background-image: url('../icons/icons8-reset2.svg');
+  background-position: center;
+}
+#forward {
+  background-image: url('../icons/icons8-reset1.svg');
+  background-position: center;
+}
+
+.wrapper {
+  max-inline-size: 900px;
+  margin: auto;
+
+}
+.player video {
+  inline-size: 100%;
+  aspect-ratio: 16/9;
+}
+
+.player {
+  position: relative;
+}
+
+.player-actions {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.player-progress {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  display: flex;
+  z-index: 2;
+}
+
+.player-progress input {
+  flex: 1;
+}
+
+.player-overlay {
+  inset: 0;
+  opacity: 0;
+  transition: .3s opacity;
+}
+
+.player:hover .player-overlay {
+  opacity: 1;
+}

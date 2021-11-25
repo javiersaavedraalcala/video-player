@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Video Player</title>
+</head>
+<body> 
+
+  <div class="wrapper">
+    <div class="player">
+      <div class="player-overlay">
+        <div class="player-actions">
+          <button class="button" id="backward" aria-label="Retroceder 10 seg" title="Retroceder 10 seg"></button>
+          <button class="button" id="play" aria-label="Reproducir" title="Reproducir"></button>
+          <button class="button" id="pause" aria-label="Pausar" title="Pausar" hidden></button>
+          <button class="button" id="forward" aria-label="Adelantar 10 seg" title="Adelantar 10 seg"></button>
+        </div>
+        <div class="player-progress">
+          <input id="progressBar" type="range" min="0" max="100" step=".1" value="0">
+        </div>
+      </div>
+      <video id="video" src="./images/videos/earth.mp4"></video>
+
+    </div>
+  </div>
+
+  <script>
+    const $video = document.querySelector('#video');
+    const $backward = document.querySelector('#backward');
+    const $forward = document.querySelector('#forward');
+    const $play = document.querySelector('#play');
+    const $pause = document.querySelector('#pause');
+    const $progressBar = document.querySelector('#progressBar');
+    
+    $play.addEventListener('click', handlePlay);
+    $pause.addEventListener('click', handlePause);
+    $backward.addEventListener('click', handleBackward);
+    $forward.addEventListener('click', handleForward);
+    $video.addEventListener('loadedmetadata', handleLoaded);
+    $video.addEventListener('timeupdate', handleTimeUpdate);
+    $progressBar.addEventListener('input', handleInput);
+
+    
+    function handlePlay() {
+      $video.play();
+      $pause.hidden = false;
+      $play.hidden = true;
+    }
+
+    function handlePause() {
+      $video.pause();
+      $play.hidden = false;
+      $pause.hidden = true;
+    }
+
+    function handleBackward() {
+      $video.currentTime -= 10;
+    }
+
+    function handleForward() {
+      $video.currentTime += 10;
+    }
+
+    function handleLoaded() {
+      $progressBar.max = $video.duration;
+    }
+
+    function handleTimeUpdate() {
+      $progressBar.value = $video.currentTime;
+    }
+
+    function handleInput() {
+      $video.currentTime = $progressBar.value;
+    }
+  </script>
+</body>
+</html>
